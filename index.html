@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Modern Resume Maker</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- FORM SECTION -->
+  <div class="container" id="form-section">
+    <h2>✍ Create Your Resume</h2>
+
+    <label>Name:</label>
+    <input type="text" id="name" placeholder="Your full name" />
+
+    <label>Email:</label>
+    <input type="email" id="email" placeholder="your@email.com" />
+
+    <label>Phone:</label>
+    <input type="text" id="phone" placeholder="1234567890" />
+
+    <label>Location:</label>
+    <input type="text" id="location" placeholder="City, Country" />
+
+    <label>Summary:</label>
+    <textarea id="summary" rows="3" placeholder="Short professional summary"></textarea>
+
+    <label>Skills (comma separated):</label>
+    <input type="text" id="skills" placeholder="HTML, CSS, JavaScript" />
+
+    <label>Education:</label>
+    <textarea id="education" rows="3" placeholder="B.Tech - ABC University (2023)"></textarea>
+
+    <label>Experience:</label>
+    <textarea id="experience" rows="3" placeholder="Frontend Dev - XYZ Company (2022-Present)"></textarea>
+
+    <label>Achievements:</label>
+    <textarea id="achievements" rows="3" placeholder="List of achievements"></textarea>
+
+    <label>Volunteering:</label>
+    <textarea id="volunteering" rows="3" placeholder="Volunteering experiences"></textarea>
+
+    <div class="button-group">
+      <button onclick="generateResume()">Preview Resume</button>
+      <button onclick="clearForm()">Clear</button>
+    </div>
+  </div>
+
+  <!-- RESUME OUTPUT SECTION -->
+  <div class="resume-output" id="resume-section">
+    <div class="top-btns">
+      <button onclick="editAgain()">✏️ Edit Again</button>
+      <button onclick="downloadPDF()">⬇️ Download PDF</button>
+    </div>
+
+    <div id="resume">
+      <h1 id="r-name">Your Name</h1>
+      <p id="r-contact">City | your.email@example.com | 0000000000</p>
+
+      <h3>Summary</h3>
+      <p id="r-summary">Summary text here...</p>
+
+      <h3>Skills</h3>
+      <ul id="r-skills"></ul>
+
+      <h3>Education</h3>
+      <p id="r-education"></p>
+
+      <h3>Experience</h3>
+      <p id="r-experience"></p>
+
+      <h3>Achievements</h3>
+      <p id="r-achievements"></p>
+
+      <h3>Volunteering</h3>
+      <p id="r-volunteering"></p>
+    </div>
+  </div>
+
+  <!-- PDF LIBRARY -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

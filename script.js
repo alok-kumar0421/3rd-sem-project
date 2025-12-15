@@ -1,55 +1,85 @@
 function generateResume() {
-  const name = document.getElementById("name").value || "Your Name";
-  const email = document.getElementById("email").value || "";
-  const phone = document.getElementById("phone").value || "";
-  const location = document.getElementById("location").value || "";
-  const summary = document.getElementById("summary").value || "";
-  const skills = document.getElementById("skills").value.split(",");
-  const education = document.getElementById("education").value || "";
-  const experience = document.getElementById("experience").value || "";
-  const achievements = document.getElementById("achievements").value || "";
-  const volunteering = document.getElementById("volunteering").value || "";
+  const skills = skillsEl.value.split(",");
 
-  document.getElementById("r-name").textContent = name;
-  document.getElementById("r-contact").textContent = `${location} | ${email} | ${phone}`;
-  document.getElementById("r-summary").textContent = summary;
+  form.style.display = "none";
+  output.style.display = "block";
 
-  const skillsList = document.getElementById("r-skills");
-  skillsList.innerHTML = "";
-  skills.forEach(skill => {
-    if (skill.trim()) {
-      const li = document.createElement("li");
-      li.textContent = skill.trim();
-      skillsList.appendChild(li);
-    }
-  });
+  rName.textContent = nameEl.value;
+  rRole.textContent = roleEl.value;
+  rContact.textContent = `${locationEl.value} | ${emailEl.value} | ${phoneEl.value}`;
+  rSummary.textContent = summaryEl.value;
+  rExperience.textContent = experienceEl.value;
+  rEducation.textContent = educationEl.value;
+  rAchievements.textContent = achievementsEl.value;
 
-  document.getElementById("r-education").textContent = education;
-  document.getElementById("r-experience").textContent = experience;
-  document.getElementById("r-achievements").textContent = achievements;
-  document.getElementById("r-volunteering").textContent = volunteering;
+  rLinks.innerHTML = `
+    <a href="${linkedinEl.value}" target="_blank">LinkedIn</a>
+    <a href="${githubEl.value}" target="_blank">GitHub</a>
+    <a href="${leetcodeEl.value}" target="_blank">LeetCode</a>
+    <a href="${codechefEl.value}" target="_blank">CodeChef</a>
+  `;
 
-  document.getElementById("form-section").style.display = "none";
-  document.getElementById("resume-section").style.display = "block";
+  rSkills.innerHTML = skills
+    .filter(s => s.trim())
+    .map(s => `<li>${s.trim()}</li>`)
+    .join("");
+
+  rProject.innerHTML = `
+    <b>${pname.value}</b> | ${ptech.value}<br>
+    ${pduration.value}
+    <ul><li>${pdesc.value}</li></ul>
+  `;
 }
 
 function editAgain() {
-  document.getElementById("form-section").style.display = "block";
-  document.getElementById("resume-section").style.display = "none";
-}
-
-function clearForm() {
-  document.querySelectorAll("input, textarea").forEach(el => el.value = "");
+  form.style.display = "block";
+  output.style.display = "none";
 }
 
 function downloadPDF() {
-  const resume = document.getElementById("resume");
-  const opt = {
-    margin: 0.5,
+  const resume = document.getElementById("resume2");
+
+  html2pdf().set({
+    margin: 0.2,
     filename: "My_Resume.pdf",
-    image: { type: "jpeg", quality: 0.98 },
+    image: { type: "jpeg", quality: 1 },
     html2canvas: { scale: 2 },
     jsPDF: { unit: "in", format: "a4", orientation: "portrait" }
-  };
-  html2pdf().set(opt).from(resume).save();
+  }).from(resume).save();
 }
+
+/* ELEMENTS */
+const form = document.getElementById("form-section");
+const output = document.getElementById("resume-section");
+
+const nameEl = document.getElementById("name");
+const roleEl = document.getElementById("role");
+const emailEl = document.getElementById("email");
+const phoneEl = document.getElementById("phone");
+const locationEl = document.getElementById("location");
+const summaryEl = document.getElementById("summary");
+const skillsEl = document.getElementById("skills");
+const experienceEl = document.getElementById("experience");
+const educationEl = document.getElementById("education");
+const achievementsEl = document.getElementById("achievements");
+
+const linkedinEl = document.getElementById("linkedin");
+const githubEl = document.getElementById("github");
+const leetcodeEl = document.getElementById("leetcode");
+const codechefEl = document.getElementById("codechef");
+
+const pname = document.getElementById("pname");
+const ptech = document.getElementById("ptech");
+const pduration = document.getElementById("pduration");
+const pdesc = document.getElementById("pdesc");
+
+const rName = document.getElementById("r-name");
+const rRole = document.getElementById("r-role");
+const rContact = document.getElementById("r-contact");
+const rLinks = document.getElementById("r-links");
+const rSummary = document.getElementById("r-summary");
+const rSkills = document.getElementById("r-skills");
+const rProject = document.getElementById("r-project");
+const rExperience = document.getElementById("r-experience");
+const rEducation = document.getElementById("r-education");
+const rAchievements = document.getElementById("r-achievements");
